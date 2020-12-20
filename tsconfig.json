@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "ES5",
-    "module": "ES6",
-    "moduleResolution": "node",
-    "lib": ["ES2020", "DOM"],
-    "jsx": "react",
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "downlevelIteration": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "rootDir": "./src",
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "target"]
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "ES6",
+        "moduleResolution": "node",
+        "lib": ["ES2020", "DOM"],
+        "jsx": "react",
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "rootDir": "./src"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "target"]
 }

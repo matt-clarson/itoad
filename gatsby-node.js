@@ -1,7 +1,48 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
+const path = require("path");
 
-// You can delete this file if you're not using it
+const slugify = s => s.replace(/\s|_/g, "-").toLowerCase();
+
+exports.onCreateNode = ({ node, actions }) => {
+    if (node.internal.type === "MarkdownRemark") {
+        const {
+            frontmatter: { title, date },
+        } = node;
+
+        const slug = `/recipes/${date}/${slugify(title)}`;
+
+        console.log(`Page: '${title}' #${slug}`);
+
+        actions.createNodeField({
+            node,
+            name: `slug`,
+            value: slug,
+        });
+    }
+};
+
+exports.createPages = async ({ graphql, actions }) => {
+    const query = await graphql(`
+        query {
+            allMarkdownRemark {
+                edges {
+                    node {
+                        fields {
+                            slug
+                        }
+                    }
+                }
+            }
+        }
+    `);
+
+    query.data.allMarkdownRemark.edges.forEach(({ node }) => {
+        const {
+            fields: { slug },
+        } = node;
+        actions.createPage({
+            path: slug,
+            component: path.resolve("./src/templates/recipe.tsx"),
+            context: { slug },
+        });
+    });
+};
