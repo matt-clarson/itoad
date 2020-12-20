@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC } from "react"
 import { Link } from "gatsby"
 
 type HeaderProps = {
-  siteTitle?: string;
+  siteTitle?: string
 }
 
 export const Header: FC<HeaderProps> = ({ siteTitle }) => (
@@ -27,10 +27,9 @@ export const Header: FC<HeaderProps> = ({ siteTitle }) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle ?? ''}
+          {siteTitle ?? ""}
         </Link>
       </h1>
     </div>
   </header>
 )
-

@@ -1,21 +1,18 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React, { DetailedHTMLProps, FC, MetaHTMLAttributes } from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-type Meta = DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>, HTMLMetaElement>;
+type Meta = DetailedHTMLProps<
+  MetaHTMLAttributes<HTMLMetaElement>,
+  HTMLMetaElement
+>
 
 type SEOProps = {
-  description?: string;
-  lang?: string;
-  meta?: Meta[];
-  title: string;
+  description?: string
+  lang?: string
+
+  meta?: Meta[]
+  title: string
 }
 
 export const SEO: FC<SEOProps> = ({ description, lang, meta, title }) => {
@@ -80,4 +77,3 @@ export const SEO: FC<SEOProps> = ({ description, lang, meta, title }) => {
     />
   )
 }
-
