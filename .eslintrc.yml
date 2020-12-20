@@ -8,6 +8,11 @@ plugins:
 extends:
     - "plugin:prettier/recommended"
     - "plugin:react/recommended"
+
+settings:
+    react:
+        version: detect
+
 rules:
     \@typescript-eslint/no-unused-vars: off
     unused-imports/no-unused-imports-ts: error
