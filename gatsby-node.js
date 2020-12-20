@@ -2,14 +2,16 @@ const path = require("path");
 
 const slugify = s => s.replace(/\s|_/g, "-").toLowerCase();
 
-exports.onCreateNode = ({ node, actions }) => {
-    if (node.internal.type === "MarkdownRemark") {
+exports.onCreateNode = ({ node, getNode, actions }) => {
+    if (node.internal.type === "Mdx") {
         const {
-            frontmatter: { title, date },
+            exports: { title },
         } = node;
-
-        const slug = `/recipes/${date}/${slugify(title)}`;
-
+        if (title === undefined) {
+            const fileNode = getNode(node.parent);
+            throw new Error(`Page at ${fileNode.relativePath} has no title export.`);
+        }
+        const slug = `/recipes/${slugify(title)}`;
         console.log(`Page: '${title}' #${slug}`);
 
         actions.createNodeField({
@@ -23,7 +25,7 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.createPages = async ({ graphql, actions }) => {
     const query = await graphql(`
         query {
-            allMarkdownRemark {
+            allMdx {
                 edges {
                     node {
                         fields {
@@ -35,13 +37,13 @@ exports.createPages = async ({ graphql, actions }) => {
         }
     `);
 
-    query.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    query.data.allMdx.edges.forEach(({ node }) => {
         const {
             fields: { slug },
         } = node;
         actions.createPage({
             path: slug,
-            component: path.resolve("./src/templates/recipe.tsx"),
+            component: path.resolve("./src/mdx-layout.tsx"),
             context: { slug },
         });
     });

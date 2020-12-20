@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
 import { Header } from "./header";
@@ -37,8 +36,4 @@ export const Layout: FC = ({ children }) => {
             </div>
         </>
     );
-};
-
-Layout.propTypes = {
-    children: PropTypes.node.isRequired,
 };

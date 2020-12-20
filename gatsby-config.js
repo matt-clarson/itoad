@@ -12,7 +12,7 @@ module.exports = {
                 path: `${__dirname}/src/pages/recipes`,
             },
         },
-        `gatsby-transformer-remark`,
+        `gatsby-plugin-mdx`,
         `gatsby-plugin-react-helmet`,
         {
             resolve: `gatsby-source-filesystem`,
