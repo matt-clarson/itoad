@@ -28,6 +28,9 @@ exports.createPages = async ({ graphql, actions }) => {
             allMdx {
                 edges {
                     node {
+                        exports {
+                            img
+                        }
                         fields {
                             slug
                         }
@@ -39,12 +42,14 @@ exports.createPages = async ({ graphql, actions }) => {
 
     query.data.allMdx.edges.forEach(({ node }) => {
         const {
+            exports: { img },
             fields: { slug },
         } = node;
+        console.log("Image: ", img);
         actions.createPage({
             path: slug,
-            component: path.resolve("./src/mdx-layout.tsx"),
-            context: { slug },
+            component: path.resolve("./src/recipe-layout.tsx"),
+            context: { img, slug },
         });
     });
 };

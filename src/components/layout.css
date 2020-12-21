@@ -8,4 +8,20 @@
     .list-dash {
         list-style-type: "-";
     }
+
+    .li-mb-1 li {
+        @apply mb-1;
+    }
+
+    .li-pl-1 li {
+        @apply pl-1;
+    }
+
+    .li-mb-4 li {
+        @apply mb-4;
+    }
+
+    .li-pl-2 li {
+        @apply pl-2;
+    }
 }
