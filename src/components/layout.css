@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    a {
+        @apply font-semibold hover:underline;
+    }
+}
+
 @layer utilities {
     .list-dash {
         list-style-type: "-";

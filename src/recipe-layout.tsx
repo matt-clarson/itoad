@@ -72,7 +72,9 @@ const RecipeLayout: FC<RecipeProps> = ({ data }) => {
                     imgSources={sources}
                 >
                     <div className="ml-2 sm:ml-10 mt-6 lg:mt-10 pr-10">
-                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                        <div className="max-w-prose font-text">
+                            <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                        </div>
                     </div>
                 </RecipeArticle>
             </Layout>

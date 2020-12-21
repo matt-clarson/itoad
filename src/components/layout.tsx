@@ -31,19 +31,19 @@ export const Layout: FC = ({ children }) => {
                         <nav className="ml-5">
                             <ul className="font-text text-base md:text-lg">
                                 <li>
-                                    <Link to="/" className="hover:underline">
+                                    <Link to="/" className="font-normal">
                                         {"Home"}
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/recipes" className="hover:underline">
+                                    <Link to="/recipes" className="font-normal">
                                         {"Recipes"}
                                     </Link>
                                 </li>
                                 <li>
                                     <a
                                         href="https://www.instagram.com/itsthisoradoughnut"
-                                        className="hover:underline"
+                                        className="font-normal"
                                     >
                                         {"@itsthisoradoughnut"}
                                     </a>

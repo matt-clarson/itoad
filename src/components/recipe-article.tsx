@@ -34,7 +34,7 @@ export const RecipeArticle: FC<RecipeArticleProps> = ({ title, tags, imgSources,
 };
 
 export const Ingredients: FC = ({ children }) => (
-    <section>
+    <section className="mt-4 lg:mt-6">
         <h2 className="font-title text-xl md:text-2xl text-gray-800 tracking-wide mb-4">{`Ingredients`}</h2>
         {children}
     </section>
@@ -48,9 +48,7 @@ export const Method: FC = ({ children }) => (
 );
 
 export const MethodList: FC = ({ children }) => (
-    <ol className="px-8 list-dash font-text text-gray-600 max-w-prose li-mb-4 li-pl-2">
-        {children}
-    </ol>
+    <ol className="px-8 list-dash font-text text-gray-600 li-mb-4 li-pl-2">{children}</ol>
 );
 
 export const IngredientsList: FC = ({ children }) => (

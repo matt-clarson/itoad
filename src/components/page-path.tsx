@@ -11,7 +11,7 @@ export const PagePath: FC<PagePathProps> = ({ paths, className }) => {
         <p className={className}>
             {paths.map(([name, path]) => (
                 <Fragment key={name}>
-                    <Link to={path} className="hover:underline">
+                    <Link to={path} className="font-normal">
                         {name}
                     </Link>
                     <span>{` / `}</span>
