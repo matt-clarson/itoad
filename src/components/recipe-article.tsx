@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import Img, { FixedObject } from "gatsby-image";
 import React, { FC, Fragment } from "react";
 
@@ -5,9 +6,16 @@ type RecipeArticleProps = {
     title: string;
     tags: string[];
     imgSources: FixedObject | FixedObject[];
+    date: Date;
 };
 
-export const RecipeArticle: FC<RecipeArticleProps> = ({ title, tags, imgSources, children }) => {
+export const RecipeArticle: FC<RecipeArticleProps> = ({
+    title,
+    tags,
+    imgSources,
+    date,
+    children,
+}) => {
     return (
         <article className="relative">
             <div className="ml-2 sm:ml-10">
@@ -22,6 +30,9 @@ export const RecipeArticle: FC<RecipeArticleProps> = ({ title, tags, imgSources,
                         </Fragment>
                     ))}
                 </ul>
+                <p className="mt-1 font-text text-xs text-gray-700 tracking-wider">
+                    {format(date, "EEE do LLLL yyyy")}
+                </p>
             </div>
 
             <span className="my-4 inline-block h-1 w-full bg-gray-800" role="presentation" />

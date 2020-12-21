@@ -31,6 +31,7 @@ type RecipeProps = {
             exports: {
                 title: string;
                 tags: string[];
+                date: string;
             };
             body: string;
         };
@@ -70,6 +71,7 @@ const RecipeLayout: FC<RecipeProps> = ({ data }) => {
                     title={data.mdx.exports.title}
                     tags={data.mdx.exports.tags}
                     imgSources={sources}
+                    date={new Date(data.mdx.exports.date)}
                 >
                     <div className="ml-2 sm:ml-10 mt-6 lg:mt-10 pr-10">
                         <div className="max-w-prose font-text">
@@ -88,6 +90,7 @@ export const query = graphql`
             exports {
                 title
                 tags
+                date
             }
             body
         }
