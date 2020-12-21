@@ -4,29 +4,49 @@ import Img, { FixedObject } from "gatsby-image";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
 
+type Image = {
+    childImageSharp: {
+        fixed: FixedObject;
+    };
+};
+
 type RecipeProps = {
     data: {
-        file: {
-            childImageSharp: {
-                fixed: FixedObject;
-            };
-        };
+        mobileScreen: Image;
+        smallScreen: Image;
+        regularScreen: Image;
+        largeScreen: Image;
     };
 };
 
 const Recipe: FC<RecipeProps> = ({ data }) => {
+    const sources = [
+        data.mobileScreen.childImageSharp.fixed,
+        {
+            ...data.smallScreen.childImageSharp.fixed,
+            media: `(min-width: 768px) and (max-width: 1024px)`,
+        },
+        {
+            ...data.regularScreen.childImageSharp.fixed,
+            media: `(min-width: 1024px) and (max-width: 1280px)`,
+        },
+        {
+            ...data.largeScreen.childImageSharp.fixed,
+            media: `(min-width: 1280px)`,
+        },
+    ];
     return (
         <Layout>
             <SEO title="Pan-Fried Trout" />
-            <p className="ml-10 font-text text-base font-thin text-gray-800">
+            <p className="ml-2 sm:ml-10 font-text text-sm md:text-base font-thin text-gray-800">
                 <span className="underline">{`Home`}</span>
                 {` / `}
                 <span className="underline">{`Recipes`}</span>
                 {` /`}
             </p>
             <article className="relative">
-                <div className="ml-10">
-                    <h1 className="mt-4 mb-1 font-title text-4xl text-gray-800">{`Pan-Fried Trout`}</h1>
+                <div className="ml-2 sm:ml-10">
+                    <h1 className="mt-2 md:mt-4 mb-1 font-title text-2xl md:text-3xl lg:text-4xl text-gray-800">{`Pan-Fried Trout`}</h1>
                     <ul className="font-text uppercase list-none text-xs text-gray-700 tracking-wider">
                         <li className="inline-block">{`Fish`}</li>
                         <span aria-hidden>{` - `}</span>
@@ -40,11 +60,11 @@ const Recipe: FC<RecipeProps> = ({ data }) => {
 
                 <span className="my-4 inline-block h-1 w-full bg-gray-800" role="presentation" />
 
-                <Img fixed={data.file.childImageSharp.fixed} className="ml-10 rounded-xl" />
+                <Img fixed={sources} className="ml-2 sm:ml-10 mr-6 rounded-xl" />
 
-                <div className="ml-10 mt-10 pr-10">
+                <div className="ml-2 sm:ml-10 mt-6 lg:mt-10 pr-10">
                     <section>
-                        <h2 className="font-title text-2xl text-gray-800 tracking-wide mb-4">{`Ingredients`}</h2>
+                        <h2 className="font-title text-xl md:text-2xl text-gray-800 tracking-wide mb-4">{`Ingredients`}</h2>
                         <ul className="px-8 list-dash font-text text-gray-800 tracking-wide">
                             <li className="mb-1 pl-1">{`Boneless Trout Fillet, Skin-On`}</li>
                             <li className="mb-1 pl-1">{`Salted Butter`}</li>
@@ -58,8 +78,8 @@ const Recipe: FC<RecipeProps> = ({ data }) => {
                         </ul>
                     </section>
 
-                    <section className="mt-6">
-                        <h2 className="font-title text-2xl text-gray-800 tracking-wide mb-4">{`Method`}</h2>
+                    <section className="mt-4 lg:mt-6">
+                        <h2 className="font-title text-xl md:text-2xl text-gray-800 tracking-wide mb-4">{`Method`}</h2>
                         <ol className="px-8 list-dash font-text text-gray-600 max-w-prose">
                             <li className="mb-4 pl-2">{`First, prepare the faro. Bring a pot of salted water to the boil, and add the faro. Cook for 10-15 minutes, until the faro is cooked (soft, but still slightly chewy). Add oil to a frying pan, heat to high, and add the cooked faro, frying (tossing occasionally) for 5 minutes, or until toasted, crisp, and golden brown.`}</li>
                             <li className="mb-4 pl-2">{`While the faro is cooking, start making the sauce. Melt butter in a saucepan, add mustard and the juice of a whole lemon. Whisk vigorously to emulsify and combine. Season with salt and black pepper to taste.`}</li>
@@ -76,9 +96,30 @@ const Recipe: FC<RecipeProps> = ({ data }) => {
 
 export const query = graphql`
     query {
-        file(relativePath: { eq: "pan-fried-trout.jpg" }) {
+        mobileScreen: file(relativePath: { eq: "pan-fried-trout.jpg" }) {
+            childImageSharp {
+                fixed(width: 300, quality: 100) {
+                    ...GatsbyImageSharpFixed_withWebp
+                }
+            }
+        }
+        smallScreen: file(relativePath: { eq: "pan-fried-trout.jpg" }) {
+            childImageSharp {
+                fixed(width: 400, quality: 100) {
+                    ...GatsbyImageSharpFixed_withWebp
+                }
+            }
+        }
+        regularScreen: file(relativePath: { eq: "pan-fried-trout.jpg" }) {
             childImageSharp {
                 fixed(width: 500, quality: 100) {
+                    ...GatsbyImageSharpFixed_withWebp
+                }
+            }
+        }
+        largeScreen: file(relativePath: { eq: "pan-fried-trout.jpg" }) {
+            childImageSharp {
+                fixed(width: 700, quality: 100) {
                     ...GatsbyImageSharpFixed_withWebp
                 }
             }

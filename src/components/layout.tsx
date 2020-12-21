@@ -17,8 +17,8 @@ export const Layout: FC = ({ children }) => {
 
     return (
         <>
-            <div className="py-4 pl-6 w-full min-h-screen">
-                <div className="flex flex-row justify-between">
+            <div className="py-4 pl-2 sm:pl-6 w-full min-h-screen">
+                <div className="flex flex-col sm:flex-row sm:justify-between">
                     <div className="flex flex-col">
                         <Header
                             className="ml-5"
@@ -26,25 +26,32 @@ export const Layout: FC = ({ children }) => {
                         />
                         <span
                             role="presentation"
-                            className="inline-block h-1 w-5/12 bg-gray-800 mt-3 mb-6"
+                            className="order-1 sm:order-none ml-3 sm:ml-0 inline-block h-1 w-5/12 bg-gray-800 mt-2 mb-3 sm:mb-6"
                         />
                         <nav className="ml-5">
-                            <ul className="font-text text-lg">
-                                <li className="hover:underline">
-                                    <Link to="/">{"Home"}</Link>
+                            <ul className="font-text text-base md:text-lg">
+                                <li>
+                                    <Link to="/" className="hover:underline">
+                                        {"Home"}
+                                    </Link>
                                 </li>
-                                <li className="hover:underline">
-                                    <Link to="/recipes">{"Recipes"}</Link>
+                                <li>
+                                    <Link to="/recipes" className="hover:underline">
+                                        {"Recipes"}
+                                    </Link>
                                 </li>
-                                <li className="hover:underline">
-                                    <a href="https://www.instagram.com/itsthisoradoughnut">
+                                <li>
+                                    <a
+                                        href="https://www.instagram.com/itsthisoradoughnut"
+                                        className="hover:underline"
+                                    >
                                         {"@itsthisoradoughnut"}
                                     </a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
-                    <div>
+                    <div className="ml-0 sm:ml-6 mt-3 sm:mt-0">
                         <main>{children}</main>
                     </div>
                 </div>

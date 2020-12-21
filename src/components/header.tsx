@@ -9,7 +9,7 @@ type HeaderProps = {
 export const Header: FC<HeaderProps> = ({ siteTitle, className }) => (
     <header className={className}>
         <div>
-            <h1 className="font-title text-4xl max-w-sm">
+            <h1 className="font-title text-2xl md:text-3xl lg:text-4xl">
                 <Link className="hover:underline" to="/">
                     {siteTitle ?? ""}
                 </Link>
