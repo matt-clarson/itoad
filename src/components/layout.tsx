@@ -17,23 +17,13 @@ export const Layout: FC = ({ children }) => {
 
     return (
         <>
-            <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-            <div
-                style={{
-                    margin: `0 auto`,
-                    maxWidth: 960,
-                    padding: `0 1.0875rem 1.45rem`,
-                }}
-            >
-                <main>{children}</main>
-                <footer
-                    style={{
-                        marginTop: `2rem`,
-                    }}
-                >
-                    {`© ${new Date().getFullYear()}, Built with ❤️ in Manchester, UK`}
-                </footer>
+            <div className="w-full min-h-full flex flex-row justify-between">
+                <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+                <div>
+                    <main>{children}</main>
+                </div>
             </div>
+            <footer>{`© ${new Date().getFullYear()}, Built with ❤️ in Manchester, UK`}</footer>
         </>
     );
 };
