@@ -5,7 +5,7 @@ const slugify = s => s.replace(/\s|_/g, "-").toLowerCase();
 exports.onCreateNode = ({ node, getNode, actions }) => {
     if (node.internal.type === "Mdx") {
         const {
-            exports: { title },
+            exports: { title, img },
         } = node;
         if (title === undefined) {
             const fileNode = getNode(node.parent);
@@ -13,11 +13,18 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         }
         const slug = `/recipes/${slugify(title)}`;
         console.log(`Page: '${title}' #${slug}`);
+        const featuredImage = path.resolve(__dirname, "src/images", img);
 
         actions.createNodeField({
             node,
             name: `slug`,
             value: slug,
+        });
+
+        actions.createNodeField({
+            node,
+            name: "featuredImage",
+            value: featuredImage,
         });
     }
 };

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import Img, { FixedObject } from "gatsby-image";
-import React, { FC, Fragment } from "react";
+import React, { FC } from "react";
+import { Tags } from "./tags";
 
 type RecipeArticleProps = {
     title: string;
@@ -22,14 +23,7 @@ export const RecipeArticle: FC<RecipeArticleProps> = ({
                 <h1 className="mt-2 md:mt-4 mb-1 font-title text-2xl md:text-3xl lg:text-4xl text-gray-800">
                     {title}
                 </h1>
-                <ul className="font-text uppercase list-none text-xs text-gray-700 tracking-wider">
-                    {tags.map((tag, index, arr) => (
-                        <Fragment key={tag}>
-                            <li className="inline-block">{tag}</li>
-                            {index < arr.length - 1 && <span aria-hidden>{` - `}</span>}
-                        </Fragment>
-                    ))}
-                </ul>
+                <Tags tags={tags} />
                 <p className="mt-1 font-text text-xs text-gray-700 tracking-wider">
                     {format(date, "EEE do LLLL yyyy")}
                 </p>

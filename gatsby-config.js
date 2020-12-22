@@ -4,6 +4,9 @@ module.exports = {
         description: `Recipes for when your heart wants a doughnut, but your head wants to look healthy/cultured/adventurous on social media`,
         author: `matt-clarson <clarson469@gmail.com>`,
     },
+    mapping: {
+        "Mdx.fields.featuredImage": "File.absolutePath",
+    },
     plugins: [
         {
             resolve: `gatsby-source-filesystem`,
