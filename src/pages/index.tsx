@@ -57,7 +57,7 @@ const IndexPage: FC<IndexPageProps> = ({ data }) => {
                                 role="presentation"
                                 className="inline-block absolute top-4 left-2 w-1 h-1/2 bg-gray-800"
                             />
-                            <Link to={node.fields.slug}>
+                            <Link to={node.fields.slug} title={node.exports.title}>
                                 <Img fixed={getImageSources(data, index)} className="rounded-xl" />
                             </Link>
                         </div>

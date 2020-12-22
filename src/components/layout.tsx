@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 
 import { Header } from "./header";
 import "./layout.css";
+import { Nav } from "./nav";
 
 type LayoutProps = {
     pushRight?: boolean;
@@ -32,28 +33,17 @@ export const Layout: FC<LayoutProps> = ({ children, pushRight }) => {
                             role="presentation"
                             className="order-1 sm:order-none ml-3 sm:ml-0 inline-block h-1 w-5/12 bg-gray-800 mt-2 mb-3 sm:mb-6"
                         />
-                        <nav className="ml-5">
-                            <ul className="font-text text-base md:text-lg">
-                                <li>
-                                    <Link to="/" className="font-normal">
-                                        {"Home"}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/recipes" className="font-normal">
-                                        {"Recipes"}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <a
-                                        href="https://www.instagram.com/itsthisoradoughnut"
-                                        className="font-normal"
-                                    >
-                                        {"@itsthisoradoughnut"}
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <Nav
+                            className="ml-5"
+                            links={[
+                                ["Home", "/"],
+                                ["Recipes", "/recipes"],
+                                [
+                                    "@itsthisoradoughnut",
+                                    "https://www.instagram.com/itsthisoradoughnut",
+                                ],
+                            ]}
+                        />
                     </div>
                     <div className={`ml-0 sm:ml-6 mt-3 sm:mt-0 ${!pushRight ? "flex-grow" : ""}`}>
                         <main>{children}</main>
