@@ -40,7 +40,7 @@ type IndexPageProps = {
 
 const IndexPage: FC<IndexPageProps> = ({ data }) => {
     return (
-        <Layout>
+        <Layout pushRight>
             <SEO title="Home" />
             <ul className="flex flex-row flex-wrap mt-12 ml-10 sm:ml-16 md:ml-4">
                 {data.posts.edges.map(({ node }, index) => (

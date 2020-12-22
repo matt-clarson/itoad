@@ -58,7 +58,7 @@ const RecipeLayout: FC<RecipeProps> = ({ data }) => {
     ];
     return (
         <MDXProvider components={components}>
-            <Layout>
+            <Layout pushRight>
                 <SEO title={data.mdx.exports.title} />
                 <PagePath
                     paths={[
@@ -118,7 +118,7 @@ export const query = graphql`
         }
         largeScreen: file(relativePath: { eq: $img }) {
             childImageSharp {
-                fixed(width: 700, quality: 100) {
+                fixed(width: 600, quality: 100) {
                     ...GatsbyImageSharpFixed_withWebp
                 }
             }

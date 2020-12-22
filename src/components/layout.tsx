@@ -4,7 +4,11 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import { Header } from "./header";
 import "./layout.css";
 
-export const Layout: FC = ({ children }) => {
+type LayoutProps = {
+    pushRight?: boolean;
+};
+
+export const Layout: FC<LayoutProps> = ({ children, pushRight }) => {
     const data = useStaticQuery(graphql`
         query SiteTitleQuery {
             site {
@@ -51,7 +55,7 @@ export const Layout: FC = ({ children }) => {
                             </ul>
                         </nav>
                     </div>
-                    <div className="ml-0 sm:ml-6 mt-3 sm:mt-0">
+                    <div className={`ml-0 sm:ml-6 mt-3 sm:mt-0 ${!pushRight ? "flex-grow" : ""}`}>
                         <main>{children}</main>
                     </div>
                 </div>
