@@ -18,7 +18,7 @@ export const RecipeArticle: FC<RecipeArticleProps> = ({
     children,
 }) => {
     return (
-        <article className="relative">
+        <article className="relative mb-14">
             <div className="ml-2 sm:ml-10">
                 <h1 className="mt-2 md:mt-4 mb-1 font-title text-2xl md:text-3xl lg:text-4xl text-gray-800">
                     {title}
