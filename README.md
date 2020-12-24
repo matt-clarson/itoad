@@ -52,4 +52,6 @@ npm run build
 ./deploy/publish.py $PWD/public
 # deploy to the PROD environment:
 BUCKET_NAME=<prod_bucket_name> ./deploy/publish.py $PWD/public
+# deploy to PROD and clear old files from cache
+CACHE_ID=<cache_id> BUCKET_NAME=<prod_bucket_name> ./deploy/publish.py $PWD/public
 ```

@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
-import base64
 import boto3
+from datetime import datetime
 import gzip
 import hashlib
 import os
@@ -94,6 +94,20 @@ class PreUpload:
                 )
 
 
+def invalidate_cache(boto_client: Any, distribution_id: str):
+    cloudfront = boto_client.client("cloudfront")
+    cloudfront.create_invalidation(
+        DistributionId=distribution_id,
+        InvalidationBatch={
+            'Paths': {
+                'Quantity': 2,
+                'Items': ["/", "/*.html"]
+            },
+            'CallerReference': str(datetime.now())
+        }
+    )
+
+
 def confirm_continue():
     user_input = input("Proceed? [y/N]: ")
     if user_input not in ["y", "Y", "yes", "YES"]:
@@ -101,9 +115,10 @@ def confirm_continue():
         sys.exit(0)
 
 
-def main(public_dir: str, bucket_name: str) -> None:
+def main(public_dir: str, bucket_name: str, distribution_id: Optional[str]) -> None:
     public = os.path.abspath(public_dir)
     print(f"bucket={bucket_name}")
+    print(f"distribution_id={distribution_id}")
     print(f"profile={PROFILE_NAME}")
     print(f"public_dir={public}")
 
@@ -140,9 +155,16 @@ def main(public_dir: str, bucket_name: str) -> None:
 
     print("Finished uploading.")
 
+    if distribution_id is not None:
+        print(f"Creating invalidation for distribution '{distribution_id}'.")
+        invalidate_cache(session, distribution_id)
+    else:
+        print("No CloudFront distribution id provided, skipping cache invalidation.")
+
 
 if __name__ == "__main__":
     public_dir = sys.argv[1]
     bucket_name = os.environ.get("BUCKET_NAME", "its-this-or-a-doughnut-test")
+    distribution_id = os.environ.get("CACHE_ID", None)
 
-    main(public_dir, bucket_name)
+    main(public_dir, bucket_name, distribution_id)
