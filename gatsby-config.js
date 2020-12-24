@@ -39,5 +39,29 @@ module.exports = {
             },
         },
         `gatsby-plugin-postcss`,
+        {
+            resolve: `gatsby-plugin-webfonts`,
+            options: {
+                fonts: {
+                    google: [
+                        {
+                            family: "Work Sans",
+                            variants: [400, 600],
+                            fontDisplay: "swap",
+                            strategy: "selfHosted",
+                        },
+                        {
+                            family: "Poppins",
+                            variants: [400, 600],
+                            fontDisplay: "swap",
+                            strategy: "selfHosted",
+                        },
+                    ],
+                },
+                formats: ["woff2"],
+                useMinify: true,
+                usePreload: true,
+            },
+        },
     ],
 };
