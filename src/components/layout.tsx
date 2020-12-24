@@ -23,7 +23,7 @@ export const Layout: FC<LayoutProps> = ({ children, pushRight }) => {
     return (
         <>
             <div className="relative py-4 pl-2 sm:pl-6 w-full min-h-screen">
-                <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div className="flex flex-col sm:flex-row sm:justify-between mb-14">
                     <div className="flex flex-col">
                         <Header
                             className="ml-5"
