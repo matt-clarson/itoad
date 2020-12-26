@@ -1,16 +1,16 @@
 import React, { FC } from "react";
 import { graphql } from "gatsby";
 import { FixedObject } from "gatsby-image";
-import { Layout } from "./components/layout";
-import { SEO } from "./components/seo";
-import { PagePath } from "./components/page-path";
+import { Layout } from "../components/layout";
+import { SEO } from "../components/seo";
+import { PagePath } from "../components/page-path";
 import {
     Ingredients,
     IngredientsList,
     Method,
     MethodList,
     RecipeArticle,
-} from "./components/recipe-article";
+} from "../components/recipe-article";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
@@ -30,8 +30,10 @@ type RecipeProps = {
         mdx: {
             exports: {
                 title: string;
-                tags: string[];
                 date: string;
+            };
+            fields: {
+                effectiveTags: string[];
             };
             body: string;
         };
@@ -40,7 +42,7 @@ type RecipeProps = {
 
 const components = { Ingredients, Method, ul: IngredientsList, ol: MethodList };
 
-const RecipeLayout: FC<RecipeProps> = ({ data }) => {
+const RecipeTemplate: FC<RecipeProps> = ({ data }) => {
     const sources = [
         data.mobileScreen.childImageSharp.fixed,
         {
@@ -69,7 +71,7 @@ const RecipeLayout: FC<RecipeProps> = ({ data }) => {
                 />
                 <RecipeArticle
                     title={data.mdx.exports.title}
-                    tags={data.mdx.exports.tags}
+                    tags={data.mdx.fields.effectiveTags}
                     imgSources={sources}
                     date={new Date(data.mdx.exports.date)}
                 >
@@ -89,8 +91,10 @@ export const query = graphql`
         mdx(fields: { slug: { eq: $slug } }) {
             exports {
                 title
-                tags
                 date
+            }
+            fields {
+                effectiveTags
             }
             body
         }
@@ -126,4 +130,4 @@ export const query = graphql`
     }
 `;
 
-export default RecipeLayout;
+export default RecipeTemplate;

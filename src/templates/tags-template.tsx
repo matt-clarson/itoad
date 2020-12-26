@@ -1,22 +1,35 @@
 import { graphql } from "gatsby";
 import React, { FC } from "react";
 import { Layout } from "../components/layout";
+import { PagePath } from "../components/page-path";
+import { PostHeader } from "../components/post-header";
 import { PostsList } from "../components/posts-list";
 import { SEO } from "../components/seo";
 import { AllMdx, FeaturedImage, pick$, PostData } from "../utils";
 
-type IndexPageProps = {
+type TagsPageProps = {
     data: {
         posts: AllMdx<PostData>;
         postImagesSmall: AllMdx<FeaturedImage>;
         postImagesMedium: AllMdx<FeaturedImage>;
         postImagesLarge: AllMdx<FeaturedImage>;
     };
+    pageContext: {
+        tag: string;
+    };
 };
 
-const IndexPage: FC<IndexPageProps> = ({ data }) => (
+const TagsTemplate: FC<TagsPageProps> = ({ data, pageContext: { tag } }) => (
     <Layout pushRight>
-        <SEO title="Home" />
+        <SEO title={`Tag: ${tag}`} />
+        <PagePath
+            paths={[
+                ["Home", "/"],
+                ["Recipes", "/recipes"],
+            ]}
+            className="ml-2 sm:ml-10 font-text text-sm md:text-base font-thin text-gray-800"
+        />
+        <PostHeader title={`Tag: ${tag}`} />
         <PostsList
             posts={data.posts.edges.map(pick$("node"))}
             postImagesSmall={data.postImagesSmall.edges.map(pick$("node"))}
@@ -27,21 +40,27 @@ const IndexPage: FC<IndexPageProps> = ({ data }) => (
 );
 
 export const query = graphql`
-    query {
-        posts: allMdx(sort: { fields: exports___date, order: DESC }, limit: 6) {
+    query($tag: String!) {
+        posts: allMdx(
+            filter: { fields: { effectiveTags: { in: [$tag] } } }
+            sort: { fields: exports___date }
+        ) {
             edges {
                 node {
+                    fields {
+                        effectiveTags
+                        slug
+                    }
                     exports {
                         title
-                    }
-                    fields {
-                        slug
-                        effectiveTags
                     }
                 }
             }
         }
-        postImagesSmall: allMdx(sort: { fields: exports___date, order: DESC }, limit: 6) {
+        postImagesSmall: allMdx(
+            filter: { fields: { effectiveTags: { in: [$tag] } } }
+            sort: { fields: exports___date }
+        ) {
             edges {
                 node {
                     fields {
@@ -56,7 +75,10 @@ export const query = graphql`
                 }
             }
         }
-        postImagesMedium: allMdx(sort: { fields: exports___date, order: DESC }, limit: 6) {
+        postImagesMedium: allMdx(
+            filter: { fields: { effectiveTags: { in: [$tag] } } }
+            sort: { fields: exports___date }
+        ) {
             edges {
                 node {
                     fields {
@@ -71,7 +93,10 @@ export const query = graphql`
                 }
             }
         }
-        postImagesLarge: allMdx(sort: { fields: exports___date, order: DESC }, limit: 6) {
+        postImagesLarge: allMdx(
+            filter: { fields: { effectiveTags: { in: [$tag] } } }
+            sort: { fields: exports___date }
+        ) {
             edges {
                 node {
                     fields {
@@ -89,4 +114,4 @@ export const query = graphql`
     }
 `;
 
-export default IndexPage;
+export default TagsTemplate;

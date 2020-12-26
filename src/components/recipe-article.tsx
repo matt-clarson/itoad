@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import Img, { FixedObject } from "gatsby-image";
 import React, { FC } from "react";
+import { PostHeader } from "./post-header";
 import { Tags } from "./tags";
 
 type RecipeArticleProps = {
@@ -19,17 +20,12 @@ export const RecipeArticle: FC<RecipeArticleProps> = ({
 }) => {
     return (
         <article className="relative">
-            <div className="ml-2 sm:ml-10">
-                <h1 className="mt-2 md:mt-4 mb-1 font-title text-2xl md:text-3xl lg:text-4xl text-gray-800">
-                    {title}
-                </h1>
+            <PostHeader title={title}>
                 <Tags tags={tags} />
                 <p className="mt-1 font-text text-xs text-gray-700 tracking-wider">
                     {format(date, "EEE do LLLL yyyy")}
                 </p>
-            </div>
-
-            <span className="my-4 inline-block h-1 w-full bg-gray-800" role="presentation" />
+            </PostHeader>
 
             <Img fixed={imgSources} className="ml-2 sm:ml-10 mr-6 rounded-xl" />
 
