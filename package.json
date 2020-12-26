@@ -55,6 +55,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "deploy:test": "sh -c './deploy/publish.py ./public --yes'",
+    "deploy": "sh -c 'source ./deploy/deploy.config; ./deploy/publish.py ./public --yes'",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {

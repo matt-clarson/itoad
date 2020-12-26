@@ -36,6 +36,24 @@ Configure AWS
 aws configure --profile itoad-publisher
 ```
 
+Create deployment config:
+
+```bash
+# deploy.config is used to source environment variables for the deployment
+# we define the CACHE_ID and BUCKET_NAME variables. See below for what they should be.
+cat > ./deploy/deploy.config <<EOF
+export CACHE_ID=<your-cache-id>
+export BUCKET_NAME=<your-bucket-name>
+EOF
+```
+
+### Config Variables
+
+| Name          | Description                                                                                                           |
+| ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `CACHE_ID`    | The CloudFront Distribution ID. If provided, the deploy script create an invalidation for html, css, and js files     |
+| `BUCKET_NAME` | The S3 Bucket to upload the built files to. The deploy script will make sure only new and updated files are uploaded. |
+
 ## Develop
 
 Run `npm start` and write code etc.
@@ -49,9 +67,7 @@ npm run build
 # deploy to AWS (note, must have awscli installed, and a publisher IAM user configured)
 #
 # deploy to the TEST environment:
-./deploy/publish.py $PWD/public
+npm run deploy:test
 # deploy to the PROD environment:
-BUCKET_NAME=<prod_bucket_name> ./deploy/publish.py $PWD/public
-# deploy to PROD and clear old files from cache
-CACHE_ID=<cache_id> BUCKET_NAME=<prod_bucket_name> ./deploy/publish.py $PWD/public
+npm run deploy
 ```

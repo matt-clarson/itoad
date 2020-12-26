@@ -115,14 +115,15 @@ def confirm_continue():
         sys.exit(0)
 
 
-def main(public_dir: str, bucket_name: str, distribution_id: Optional[str]) -> None:
+def main(public_dir: str, bucket_name: str, distribution_id: Optional[str], interactive=True) -> None:
     public = os.path.abspath(public_dir)
     print(f"bucket={bucket_name}")
     print(f"distribution_id={distribution_id}")
     print(f"profile={PROFILE_NAME}")
     print(f"public_dir={public}")
 
-    confirm_continue()
+    if interactive:
+        confirm_continue()
 
     print("")
 
@@ -147,7 +148,8 @@ def main(public_dir: str, bucket_name: str, distribution_id: Optional[str]) -> N
     for p in ps:
         print(p.describe())
 
-    confirm_continue()
+    if interactive:
+        confirm_continue()
 
     for p in ps:
         print(f"Uploading {p.local_file} -> s3://{bucket_name}/{p.key}")
@@ -164,7 +166,8 @@ def main(public_dir: str, bucket_name: str, distribution_id: Optional[str]) -> N
 
 if __name__ == "__main__":
     public_dir = sys.argv[1]
+    interactive = sys.argv[2] != "--yes"
     bucket_name = os.environ.get("BUCKET_NAME", "its-this-or-a-doughnut-test")
     distribution_id = os.environ.get("CACHE_ID", None)
 
-    main(public_dir, bucket_name, distribution_id)
+    main(public_dir, bucket_name, distribution_id, interactive=interactive)
