@@ -2,7 +2,7 @@
   "name": "itoad",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "matt-clarson <clarson469@gmail.com>",
   "dependencies": {
     "autoprefixer": "^10.1.0",
