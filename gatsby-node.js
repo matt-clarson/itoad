@@ -47,7 +47,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         }
         const slug = `/recipes/${slugify(title)}`;
         console.log(`Page: '${title}' #${slug}`);
-        const featuredImage = path.resolve(__dirname, "src/images", img);
+        const featuredImage = path.resolve(process.env["CONTENT_DIR"], "images", img);
 
         actions.createNodeField({
             node,

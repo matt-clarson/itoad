@@ -1,3 +1,7 @@
+const path = require("path");
+
+const contentDir = process.env["CONTENT_DIR"];
+
 module.exports = {
     siteMetadata: {
         title: `It's This, or a Doughnut`,
@@ -12,7 +16,7 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `recipes`,
-                path: `${__dirname}/src/posts`,
+                path: path.resolve(contentDir, `posts`),
             },
         },
         `gatsby-plugin-mdx`,
@@ -21,7 +25,7 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `images`,
-                path: `${__dirname}/src/images`,
+                path: path.resolve(contentDir, `images`),
             },
         },
         `gatsby-transformer-sharp`,
@@ -35,7 +39,7 @@ module.exports = {
                 background_color: `#663399`,
                 theme_color: `#663399`,
                 display: `minimal-ui`,
-                icon: `src/images/gatsby-icon.png`,
+                icon: path.resolve(contentDir, `images/gatsby-icon.png`),
             },
         },
         `gatsby-plugin-postcss`,
