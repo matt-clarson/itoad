@@ -33,13 +33,13 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `gatsby-starter-default`,
-                short_name: `starter`,
+                name: `its-this-or-a-doughnut`,
+                short_name: `itoad`,
                 start_url: `/`,
-                background_color: `#663399`,
-                theme_color: `#663399`,
+                background_color: `#fff`,
+                theme_color: `#fff`,
                 display: `minimal-ui`,
-                icon: path.resolve(contentDir, `images/gatsby-icon.png`),
+                icon: path.resolve(contentDir, `images/itoad-favicon.png`),
             },
         },
         `gatsby-plugin-postcss`,
