@@ -101,7 +101,7 @@ def invalidate_cache(boto_client: Any, distribution_id: str):
         InvalidationBatch={
             'Paths': {
                 'Quantity': 2,
-                'Items': ["/", "/*.html"]
+                'Items': ["/", "/*"]
             },
             'CallerReference': str(datetime.now())
         }
