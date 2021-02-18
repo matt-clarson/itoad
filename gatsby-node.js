@@ -1,6 +1,6 @@
 const path = require("path");
 
-const slugify = s => s.replace(/\s|_/g, "-").toLowerCase();
+const slugify = s => s.replace(/\s|_/g, "-").replace(/[()]/g, "").toLowerCase();
 
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
     [
