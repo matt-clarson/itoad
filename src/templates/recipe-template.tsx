@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { graphql } from "gatsby";
+import { Link, graphql } from "gatsby";
 import { FixedObject } from "gatsby-image";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
@@ -40,7 +40,7 @@ type RecipeProps = {
     };
 };
 
-const components = { Ingredients, Method, ul: IngredientsList, ol: MethodList };
+const components = { Ingredients, Method, ul: IngredientsList, ol: MethodList, Link };
 
 const RecipeTemplate: FC<RecipeProps> = ({ data }) => {
     const sources = [
